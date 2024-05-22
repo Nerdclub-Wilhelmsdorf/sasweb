@@ -1,35 +1,45 @@
 <script>
     import { Input, Label, Helper, Button, Checkbox, A } from "flowbite-svelte";
-    let sender = "";
-    let reciever = "";
-    let password = "";
-    let confirmPassword = "";
+    let konto = "";
+    let pin = "";
 
     function handleSubmit() {}
 </script>
 
-<form>
-    <div class="grid gap-6 mb-6 md:grid-cols-2"></div>
-    <div class="mb-6">
-        <Label for="email" class="mb-2">Kontonummer</Label>
+<Label class="mb-2 mt-6">Kontonummer</Label>
+<div class="mb-6 flex items-center">
+    <div class="w-full flex items-center">
         <Input
-            bind:value={sender}
-            placeholder="Kontonummer des Senders"
+            bind:value={konto}
+            placeholder="gulliwerner"
             required
+            class="mr-2"
         />
+        <Checkbox id="lockBetrag" />
     </div>
-    <div class="mb-6">
-        <Label for="pin" class="mb-2">PIN</Label>
+</div>
+
+<Label for="pin" class="mb-2 mt-6">PIN</Label>
+<div class="mb-6 flex items-center">
+    <div class="w-full flex items-center">
         <Input
-            bind:value={confirmPassword}
+            bind:value={pin}
             type="password"
             placeholder="••••"
             required
+            class="mr-2"
         />
+        <div class="spacer"></div>
+        <style>
+            .spacer {
+                width: 16px;
+                height: 16px;
+            }
+        </style>
     </div>
+</div>
 
-    <form on:submit|preventDefault={handleSubmit}>
-        <!-- ... -->
-        <Button type="submit">Submit</Button>
-    </form>
+<form on:submit|preventDefault={handleSubmit}>
+    <!-- ... -->
+    <Button type="submit">Submit</Button>
 </form>
