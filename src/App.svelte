@@ -1,47 +1,55 @@
-<script lang="ts">
-  import svelteLogo from './assets/svelte.svg'
-  import viteLogo from '/vite.svg'
-  import Counter from './lib/Counter.svelte'
+<script>
+  import Pay from "./lib/pay.svelte";
+  import Balance from "./lib/balance.svelte";
+  import { Link, Route } from "svelte-routing";
+  var pay = true;
+  import {
+    BottomNav,
+    BottomNavItem,
+    Skeleton,
+    ImagePlaceholder,
+  } from "flowbite-svelte";
+  import {
+    HomeSolid,
+    WalletSolid,
+    AdjustmentsVerticalOutline,
+    UserCircleSolid,
+  } from "flowbite-svelte-icons";
+
+  function handleBalanceClick() {
+    pay = false;
+    balanceColors =
+      "w-6 h-6 mb-1 text-orange-500 dark:text-orange-400 group-hover:text-orange-600 dark:group-hover:text-orange-500";
+    payColors =
+      "w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-500";
+  }
+  function handlePayClick() {
+    pay = true;
+    payColors =
+      "w-6 h-6 mb-1 text-orange-500 dark:text-orange-400 group-hover:text-orange-600 dark:group-hover:text-orange-500";
+    balanceColors =
+      "w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-500";
+  }
+  var payColors =
+    "w-6 h-6 mb-1 text-orange-500 dark:text-orange-400 group-hover:text-orange-600 dark:group-hover:text-orange-500";
+  var balanceColors =
+    "w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-500";
 </script>
 
-<main>
-  <div>
-    <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-      <img src={viteLogo} class="logo" alt="Vite Logo" />
-    </a>
-    <a href="https://svelte.dev" target="_blank" rel="noreferrer">
-      <img src={svelteLogo} class="logo svelte" alt="Svelte Logo" />
-    </a>
-  </div>
-  <h1>Vite + Svelte</h1>
+<h1>SaS Pay</h1>
 
-  <div class="card">
-    <Counter />
-  </div>
+{#if pay}
+  <Pay />
+{/if}
+{#if !pay}
+  <Balance />
+{/if}
 
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme" target="_blank" rel="noreferrer">SvelteKit</a>, the official Svelte app framework powered by Vite!
-  </p>
-
-  <p class="read-the-docs">
-    Click on the Vite and Svelte logos to learn more
-  </p>
-</main>
-
-<style>
-  .logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
-    transition: filter 300ms;
-  }
-  .logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
-  }
-  .logo.svelte:hover {
-    filter: drop-shadow(0 0 2em #ff3e00aa);
-  }
-  .read-the-docs {
-    color: #888;
-  }
-</style>
+<BottomNav position="absolute" classInner="grid-cols-2">
+  <BottomNavItem btnName="Bezahlen" on:click={handlePayClick}>
+    <WalletSolid class={payColors} />
+  </BottomNavItem>
+  <BottomNavItem btnName="Kontostand" on:click={handleBalanceClick}>
+    <AdjustmentsVerticalOutline class={balanceColors} />
+  </BottomNavItem>
+</BottomNav>
