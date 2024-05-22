@@ -1,34 +1,35 @@
-const url = 'https://saswdorf.de:8443/pay';
-const token = 'W_97xyk8G]]w';
-const data = {
-    acc1: '',
-    acc2: '',
-    amount: '',
-    pin: ''
-};
+const token = 'test';
+import Decimal from 'decimal.js';
 
-export function handlePayment(sender: string, receiver: string, pin: string, amount: string) {
-    data.acc1 = sender;
-    data.acc2 = receiver;
-    data.amount = amount;
-    data.pin = pin;
+export async function handlePayment(sender: string, receiver: string, pin: string, amount: string) : Promise<string> {
+    var data = {
+        acc1: sender,
+        acc2: receiver,
+        amount: amount,
+        pin: pin
+    };   
+    var ReturnText = ""
+    try {
 
-    fetch(url, {
+  
+    var response = await fetch("https://saswdorf.de:8443/pay", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(data)
-    }).then(response => {
-        if (response.ok) {
+    })
+        if (response.status === 200) {
             console.log('Payment successful');
-            return "Payment successful";
+            ReturnText = "Erfolgreich Bezahlt: " + amount + "D" + " (Mit Steuren: " + new Decimal(amount).mul(1.1).toString() + "D)";
         } else {
             console.log('Payment failed');
-            return "Payment failed";
+            ReturnText = "Bezahlung fehlgeschlagen";
         }
-    }).catch(error => {
-        return error;
-    });
+       // ReturnText = "Bezahlung fehlgeschlagen";
+} catch (error) {
+    ReturnText = "Bezahlung fehlgeschlagen";
+}
+return ReturnText;
 }

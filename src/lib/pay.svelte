@@ -7,13 +7,13 @@
     let reciever = "";
     let pin = "";
     let amount = "";
-
+    let ModalText = "";
     let senderLocked = false;
     let recieverLocked = false;
     let amountLocked = false;
 
-    function handleSubmit() {
-        handlePayment(sender, reciever, pin, amount);
+    async function handleSubmit(){
+        ModalText = await handlePayment(sender, reciever, pin, amount);
         if (!senderLocked) {
             sender = "";
         }
@@ -24,7 +24,9 @@
             amount = "";
         }
         pin = "";
+        defaultModal = true;
     }
+
 </script>
 
 <Label class="mb-2 mt-6">Sender</Label>
@@ -91,26 +93,20 @@
     </div>
 </div>
 
-<form on:submit|preventDefault={handleSubmit}>
-    <!-- ... -->
-    <Button type="payButton">Bezahlen</Button>
-</form>
+<Button 
+    on:click={handleSubmit}
+    disabled={
+        sender === "" || reciever === "" || pin === "" || amount === ""
+        || isNaN(Number(pin)) || isNaN(Number(amount)) || !Number.isInteger(Number(pin)) || pin.length !== 4
+        || reciever == sender
+    }
+>Bezahlen</Button>
 
-<Modal title="Terms of Service" bind:open={defaultModal} autoclose>
+<Modal title="Status" bind:open={defaultModal} autoclose>
     <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-        With less than a month to go before the European Union enacts new
-        consumer privacy laws for its citizens, companies around the world are
-        updating their terms of service agreements to comply.
-    </p>
-    <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-        The European Union’s General Data Protection Regulation (G.D.P.R.) goes
-        into effect on May 25 and is meant to ensure a common set of data rights
-        in the European Union. It requires organizations to notify users as soon
-        as possible of high-risk data breaches that could personally affect
-        them.
+        {ModalText}
     </p>
     <svelte:fragment slot="footer">
-        <Button on:click={() => alert('Handle "success"')}>I accept</Button>
-        <Button color="alternative">Decline</Button>
+        <Button on:click={() => defaultModal = false}>Bestätigen</Button>
     </svelte:fragment>
 </Modal>

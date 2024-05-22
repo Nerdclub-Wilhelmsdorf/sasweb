@@ -19,19 +19,19 @@
   function handleBalanceClick() {
     pay = false;
     balanceColors =
-      "w-6 h-6 mb-1 text-orange-500 dark:text-orange-400 group-hover:text-orange-600 dark:group-hover:text-orange-500";
+      "w-6 h-6 mb-1 text-blue-500 dark:text-blue-400 group-hover:text-blue-600 dark:group-hover:text-blue-500";
     payColors =
       "w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-500";
   }
   function handlePayClick() {
     pay = true;
     payColors =
-      "w-6 h-6 mb-1 text-orange-500 dark:text-orange-400 group-hover:text-orange-600 dark:group-hover:text-orange-500";
+      "w-6 h-6 mb-1 text-blue-500 dark:text-blue-400 group-hover:text-blue-600 dark:group-hover:text-blue-500";
     balanceColors =
       "w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-500";
   }
   var payColors =
-    "w-6 h-6 mb-1 text-orange-500 dark:text-orange-400 group-hover:text-orange-600 dark:group-hover:text-orange-500";
+    "w-6 h-6 mb-1 text-blue-500 dark:text-blue-400 group-hover:text-blue-600 dark:group-hover:text-blue-500";
   var balanceColors =
     "w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-500";
 </script>
