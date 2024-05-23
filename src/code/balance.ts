@@ -1,11 +1,11 @@
 const token = 'test';
-export async function handleBalance(konto: string, pin: string) : Promise<string> {
-        var data = {
-            acc1: konto,
-            pin: pin
-        }
-        var ReturnText = ""
-        try {
+export async function handleBalance(konto: string, pin: string): Promise<string> {
+    var data = {
+        acc1: konto,
+        pin: pin
+    }
+    var ReturnText = ""
+    try {
         var response = await fetch("https://saswdorf.de:8443/balanceCheck", {
             method: 'POST',
             headers: {
@@ -14,15 +14,23 @@ export async function handleBalance(konto: string, pin: string) : Promise<string
             },
             body: JSON.stringify(data)
         })
-            if (response.status === 200) {
-                ReturnText = "Kontostand: " + await response.text() + "D";
-            } else {
-                console.log('Verbindung fehlgeschlagen');
-                ReturnText = "Verbindung fehlgeschlagen";
-            }
-           // ReturnText = "Bezahlung fehlgeschlagen";
+        if (response.status === 200) {
+            ReturnText = "Kontostand: " + await response.text() + "D";
+        }
+        else if (response.status == 201) {
+            var text = await response.text();
+            if (text.includes("pin")) ReturnText = "Falsche Pin!";
+            else if (text.includes("no row")) ReturnText = "Konto nicht gefunden!";
+            else if (text.includes("funds")) ReturnText = "Nicht genug Geld!";
+            else if (text.includes("suspended")) ReturnText = "Konto gesperrt!";
+        }
+        else {
+            console.log('Verbindung fehlgeschlagen');
+            ReturnText = "Verbindung fehlgeschlagen";
+        }
+        // ReturnText = "Bezahlung fehlgeschlagen";
     } catch (error) {
         ReturnText = "Verbindung fehlgeschlagen";
     }
     return ReturnText;
-    }
+}
