@@ -2,6 +2,7 @@
     import { Input, Label, Helper, Button, Checkbox, A } from "flowbite-svelte";
     import { handleBalance } from "../code/balance";
     import { Modal } from "flowbite-svelte";
+    import Qr from "./qr.svelte";
     import { Qr_code } from "svelte-google-materialdesign-icons";
     import {
         qrRoute,
@@ -23,17 +24,13 @@
         showQrCode = value;
         console.log(value);
     });
-    import { Html5Qrcode } from "html5-qrcode";
-    import Qr from "./qr.svelte";
-    import QrCode from "svelte-google-materialdesign-icons/Qr_code.svelte";
-
     async function handleSubmit() {
         ShowLoadingModal.set(true);
         ModalText = await handleBalance(konto, pin);
         defaultModal = true;
         if (!kontoLocked) {
             BalanceAccount.set("");
-            konto = "";
+            konto = ""
         }
         pin = "";
         ShowLoadingModal.set(false);
@@ -56,10 +53,9 @@
             size="sm"
             disabled={kontoLocked}
             on:click={() => {
-                BalanceAccount.set("");
-                ShowBalanceModal.set(true);
-                console.log(showQrCode);
                 qrRoute.set(QrRoute.QrBalance);
+                ShowBalanceModal.set(true);
+                BalanceAccount.set("");
             }}
         >
             <Qr_code class="w-6 h-6 text-secondary-700" />
@@ -102,15 +98,13 @@
         pin.length !== 4}>Kontostand</Button
 >
 
+{#if showQrCode}
 <Modal
-    bind:open={defaultModal}
+    open
     autoclose
-    on:close={() => (defaultModal = false)}
->
-    <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-        {ModalText}
-    </p>
-    <svelte:fragment slot="footer">
-        <Button on:click={() => (defaultModal = false)}>Ok</Button>
-    </svelte:fragment>
+    on:close={() => ShowBalanceModal.set(false)}
+    dismissable={false}
+    >
+    <Qr></Qr>
 </Modal>
+{/if}
