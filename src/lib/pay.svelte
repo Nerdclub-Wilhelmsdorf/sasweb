@@ -64,7 +64,7 @@
             required
             class="mr-2"
             disabled={senderLocked}
-            autocomplete=off
+            autocomplete="one-time-code"
         />
         <Button
             pill={false}
@@ -99,7 +99,7 @@
             required
             class="mr-2"
             disabled={recieverLocked}
-            autocomplete=off
+            autocomplete="one-time-code"
         />
         <Button
             pill={false}
@@ -133,7 +133,7 @@
             required
             class="mr-2"
             disabled={amountLocked}
-            autocomplete=off
+            autocomplete="one-time-code"
         />
         <Checkbox
             id="lockBetrag"
@@ -153,7 +153,7 @@
             placeholder="••••"
             required
             class="mr-2"
-            autocomplete=off
+            autocomplete="one-time-code"
         />
         <div class="spacer"></div>
         <style>

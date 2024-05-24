@@ -46,6 +46,7 @@
             required
             disabled={kontoLocked}
             class="mr-2"
+            autocomplete="one-time-code"
         />
         <Button
             pill={false}
@@ -78,6 +79,7 @@
             required
             class="mr-2"
             pattern={"d*"}
+            autocomplete="one-time-code"
         />
         <div class="spacer"></div>
         <style>
