@@ -56,11 +56,11 @@
     {#if !isLoading}
       <BottomNav position="absolute" classInner="grid-cols-2">
         <BottomNavItem btnName="Bezahlen" on:click={handlePayClick}>
-          <Credit_card class={payColors} />
+          <Credit_card class={payColors} style="outline: none; box-shadow: none; border: none;" />
         </BottomNavItem>
 
         <BottomNavItem btnName="Kontostand" on:click={handleBalanceClick}>
-          <Person class={balanceColors} />
+          <Person class={balanceColors} style="outline: none; box-shadow: none; border: none;"/>
         </BottomNavItem>
       </BottomNav>
     {/if}
@@ -70,8 +70,7 @@
 {#if isLoading}
   <Modal
     open
-    style="width: 300px; outline: none; box-shadow: none;
-    border: none;"
+    style="outline: none; box-shadow: none; border: none;"
     dismissable={false}
     class="modal"
   >
@@ -83,3 +82,4 @@
     </div>
   </Modal>
 {/if}
+

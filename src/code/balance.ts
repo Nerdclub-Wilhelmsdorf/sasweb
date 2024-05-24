@@ -1,4 +1,5 @@
-const token = 'test';
+import {url} from './server';
+import {token} from './server';
 export async function handleBalance(konto: string, pin: string): Promise<string> {
     var data = {
         acc1: konto,
@@ -6,7 +7,7 @@ export async function handleBalance(konto: string, pin: string): Promise<string>
     }
     var ReturnText = ""
     try {
-        var response = await fetch("https://saswdorf.de:8443/balanceCheck", {
+        var response = await fetch(url + "/balanceCheck", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -1,4 +1,5 @@
-const token = 'test';
+import {url} from './server';
+import {token} from './server';
 import Decimal from 'decimal.js';
 
 export async function handlePayment(sender: string, receiver: string, pin: string, amount: string): Promise<string> {
@@ -11,7 +12,7 @@ export async function handlePayment(sender: string, receiver: string, pin: strin
     var ReturnText = ""
     var a = "";
     try {
-        var response = await fetch("https://saswdorf.de:8443/pay", {
+        var response = await fetch(url + "/pay", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

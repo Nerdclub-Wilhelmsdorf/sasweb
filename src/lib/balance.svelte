@@ -98,6 +98,17 @@
         pin.length !== 4}>Kontostand</Button
 >
 
+<overlay>
+    <Modal bind:open={defaultModal} autoclose>
+        <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+            {ModalText}
+        </p>
+        <svelte:fragment slot="footer">
+            <Button on:click={() => (defaultModal = false)}>Ok</Button>
+        </svelte:fragment>
+    </Modal>
+</overlay>
+
 {#if showQrCode}
 <Modal
     open

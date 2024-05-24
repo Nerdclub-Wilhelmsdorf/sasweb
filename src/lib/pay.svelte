@@ -12,8 +12,6 @@
         RecieverAccount,
         ShowLoadingModal,
     } from "../code/stores";
-
-    import { Html5Qrcode } from "html5-qrcode";
     import Qr from "./qr.svelte";
 
     let showQrCode = false;
@@ -66,6 +64,7 @@
             required
             class="mr-2"
             disabled={senderLocked}
+            autocomplete=off
         />
         <Button
             pill={false}
@@ -78,13 +77,14 @@
                 SenderAccount.set("");
             }}
         >
-            <Qr_code class="w-6 h-6 text-secondary-700" />
+            <Qr_code class="w-6 h-6 text-secondary-700" style="outline: none; box-shadow: none; border: none;" />
         </Button>
 
         <Checkbox
             class="without-ring"
             outline="none"
             id="lockSender"
+            style="outline: none; box-shadow: none; border: none;"
             bind:checked={senderLocked}
         />
     </div>
@@ -99,6 +99,7 @@
             required
             class="mr-2"
             disabled={recieverLocked}
+            autocomplete=off
         />
         <Button
             pill={false}
@@ -111,13 +112,14 @@
                 SenderAccount.set("");
             }}
         >
-            <Qr_code class="w-6 h-6 text-secondary-700" />
+            <Qr_code class="w-6 h-6 text-secondary-700" style="outline: none; box-shadow: none; border: none;" />
         </Button>
 
         <Checkbox
             id="lockSender2"
             class="without-ring"
             bind:checked={recieverLocked}
+            style="outline: none; box-shadow: none; border: none;"
         />
     </div>
 </div>
@@ -131,11 +133,13 @@
             required
             class="mr-2"
             disabled={amountLocked}
+            autocomplete=off
         />
         <Checkbox
             id="lockBetrag"
             class="without-ring"
             bind:checked={amountLocked}
+            style="outline: none; box-shadow: none; border: none;"
         />
     </div>
 </div>
@@ -149,6 +153,7 @@
             placeholder="••••"
             required
             class="mr-2"
+            autocomplete=off
         />
         <div class="spacer"></div>
         <style>
