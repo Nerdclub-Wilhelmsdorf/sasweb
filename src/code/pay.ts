@@ -1,11 +1,11 @@
-import {url} from './server';
-import {token} from './server';
+import { url } from './server';
+import { token } from './server';
 import Decimal from 'decimal.js';
 
 export async function handlePayment(sender: string, receiver: string, pin: string, amount: string): Promise<string> {
     var data = {
-        acc1: sender,
-        acc2: receiver,
+        from: sender,
+        to: receiver,
         amount: amount,
         pin: pin
     };
@@ -20,7 +20,9 @@ export async function handlePayment(sender: string, receiver: string, pin: strin
             },
             body: JSON.stringify(data)
         })
+        console.log(await response.text());
         if (response.status === 200) {
+
             ReturnText = "Erfolgreich Bezahlt: " + amount + "D" + " (Mit Steuren: " + new Decimal(amount).mul(1.1).toString() + "D)";
         } else if (response.status == 201) {
             var text = await response.text();
