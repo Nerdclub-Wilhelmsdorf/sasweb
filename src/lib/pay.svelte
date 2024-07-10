@@ -77,7 +77,7 @@
                 SenderAccount.set("");
             }}
         >
-            <Qr_code class="w-6 h-6 text-secondary-700" style="outline: none; box-shadow: none; border: none;" />
+            <Qr_code class="w-6 h-6 text-secondary-700 text-white" style="outline: none; box-shadow: none; border: none;" />
         </Button>
 
         <Checkbox
@@ -112,7 +112,7 @@
                 SenderAccount.set("");
             }}
         >
-            <Qr_code class="w-6 h-6 text-secondary-700" style="outline: none; box-shadow: none; border: none;" />
+            <Qr_code class="w-6 h-6 text-secondary-700  text-white" style="outline: none; box-shadow: none; border: none;" />
         </Button>
 
         <Checkbox
