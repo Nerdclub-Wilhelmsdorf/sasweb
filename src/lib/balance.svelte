@@ -59,7 +59,7 @@
                 BalanceAccount.set("");
             }}
         >
-            <Qr_code class="w-6 h-6 text-secondary-700" />
+            <Qr_code class="w-6 h-6 text-secondary-700 text-white" />
         </Button>
         <Checkbox
             id="lockBetrag"
