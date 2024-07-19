@@ -11,6 +11,7 @@
         SenderAccount,
         RecieverAccount,
         ShowLoadingModal,
+        PaymentAmount,
     } from "../code/stores";
     import Qr from "./qr.svelte";
 
@@ -32,6 +33,9 @@
     });
     RecieverAccount.subscribe((value) => {
         reciever = value;
+    });
+    PaymentAmount.subscribe((value) => {
+        amount = value;
     });
     async function handleSubmit() {
         ShowLoadingModal.set(true);
@@ -77,7 +81,10 @@
                 SenderAccount.set("");
             }}
         >
-            <Qr_code class="w-6 h-6 text-secondary-700 text-white" style="outline: none; box-shadow: none; border: none;" />
+            <Qr_code
+                class="w-6 h-6 text-secondary-700 text-white"
+                style="outline: none; box-shadow: none; border: none;"
+            />
         </Button>
 
         <Checkbox
@@ -112,7 +119,10 @@
                 SenderAccount.set("");
             }}
         >
-            <Qr_code class="w-6 h-6 text-secondary-700  text-white" style="outline: none; box-shadow: none; border: none;" />
+            <Qr_code
+                class="w-6 h-6 text-secondary-700  text-white"
+                style="outline: none; box-shadow: none; border: none;"
+            />
         </Button>
 
         <Checkbox

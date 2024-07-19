@@ -12,3 +12,4 @@ export const ShowPayModal = writable(false);
 export const SenderAccount = writable("");
 export const RecieverAccount = writable("");
 export const ShowLoadingModal = writable(false);
+export const PaymentAmount = writable("");

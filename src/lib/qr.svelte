@@ -4,6 +4,7 @@
     import { Button, Modal } from "flowbite-svelte";
     import {
         BalanceAccount,
+        PaymentAmount,
         qrRoute,
         QrRoute,
         RecieverAccount,
@@ -48,6 +49,31 @@
      * @param {any} decodedResult
      */
     function onScanSuccess(decodedText, decodedResult) {
+        if (decodedText.startsWith("k:")) {
+            decodedText = decodedText.replace("k:", "");
+            let splitDecode = decodedText.split(";");
+            let account = splitDecode[0];
+            let amount = splitDecode[1];
+            qrRoute.subscribe((value) => {
+                if (value === QrRoute.QrBalance) {
+                    stop();
+                    ShowBalanceModal.set(false);
+                    return;
+                }
+                if (
+                    value === QrRoute.QrSender ||
+                    value === QrRoute.QrReciever
+                ) {
+                    SenderAccount.set("");
+                    RecieverAccount.set(account);
+                    PaymentAmount.set(amount);
+
+                    stop();
+                    ShowPayModal.set(false);
+                    return;
+                }
+            });
+        }
         if (decodedText.startsWith("w:")) {
             decodedText = decodedText.replace("w:", "");
             qrRoute.subscribe((value) => {
